@@ -4,6 +4,6 @@
 
 <pre>
 git clone https://github.com/AKQJ1Oscar/APIREST.git
-cd CDPSfy
+cd APIREST
 npm install
 </pre>
