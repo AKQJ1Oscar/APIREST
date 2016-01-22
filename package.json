@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "3.3.x",
     "fs-extra": "^0.26.4",
+    "mongoose": "^4.3.6",
     "multer": "^1.1.0",
     "querystring": "^0.2.0"
   }
