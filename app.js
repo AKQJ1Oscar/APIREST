@@ -6,17 +6,15 @@ var app = express();
     app.use(express.limit('50mb'));
 var fse = require('fs-extra');
 var http = require("http");
-    http.createServer(app).listen(3000, function() {
-	console.log('NodeJS server running on :3000');
-    });
+    http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
 var mongoose = require('mongoose');
 var multer = require('multer');
 var qs = require('querystring');
 
-var upload = multer({ dest: 'uploads/' });
+//var upload = multer({ dest: 'uploads/' });
 
 // petición POST para subir una canción
-app.post('/', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'track', maxCount: 1 }]), function (req, res, next) {
+app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 }, { name: 'track', maxCount: 1 }]), function (req, res, next) {
   console.log('Datos de la canción subida: ' + req.files['track'][0]);
   var cancion = req.files['track'][0];
   //mover la canción de directorio a los nas
