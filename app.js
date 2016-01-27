@@ -28,7 +28,7 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 
 		try {
 			fse.copySync(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname);
 		} catch (err) {
-			console.error('ERROR: ' + err.message)
+			console.error('ERROR: ' + err)
 		}
 //		fse.copySync(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname, function (err) {
 //			if (err) return console.error('ERROR: ' + err);
