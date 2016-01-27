@@ -1,13 +1,13 @@
-// Incluímos las dependencias que vamos a utilizar
-var express = require("express"),
-    app     = express(),
-    http    = require("http"),
-    qs = require('querystring'),
-    multer = require('multer'),
-    fse = require('fs-extra'),
-    mongoose = require('mongoose'),
-    server  = http.createServer(app);
+// Include dependencies
+var express = require("express");
+var fse = require('fs-extra');
+var http = require("http");
+var mongoose = require('mongoose');
+var multer = require('multer');
+var qs = require('querystring');
 
+var app = express();
+var server = http.createServer(app);
 var upload = multer({ dest: 'public/' });
 
 // Configuramos la app para que pueda realizar métodos REST
