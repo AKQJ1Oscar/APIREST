@@ -8,15 +8,15 @@ var qs = require('querystring');
 
 var app = express();
 app.use(app.router);
-app.use(express.methodOverride()); // HTTP: PUT and DELETE support
-app.use(express.limit('50mb'));    // Max file size
+app.use(express.methodOverride());
+app.use(express.limit('50mb'));
 
 var server = http.createServer(app);
 server.listen(3000, function() {
 	console.log("NodeJS server running on :3000");
 });
 
-var upload = multer({ dest: 'public/' });
+var upload = multer({ dest: 'uploads/' });
 
 // petición GET para obtener una canción
 app.get('/cancion/:trackname', function(req, res) {
