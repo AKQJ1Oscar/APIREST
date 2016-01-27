@@ -12,7 +12,7 @@ var multer = require('multer');
 var qs = require('querystring');
 
 // POST request - Upload track and cover
-app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 }, { name: 'track', maxCount: 1 }]), function (req, res, next) {
+app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image' }, { name: 'track' }]), function (req, res, next) {
 	console.log('INFO: A track is being uploaded');
   	var cancion = req.files['track'][0];
   	// Move track to nas directory
@@ -21,7 +21,6 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 
   		console.log('OK: Track uploaded successfully')
 	});
 	// Upload cover if exists
-//	if (req.files['image'] !== undefined) {
 	if (!req.files['image']) console.log('INFO: No cover is being uploaded');
 	else {
 		console.log('INFO: A cover for the track is being uploaded');
