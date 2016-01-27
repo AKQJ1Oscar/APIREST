@@ -17,6 +17,11 @@ app.configure(function () {
 	app.use(express.limit('50mb'));    // Max file size
 });
 
+// Server listening on port 3000
+server.listen(3000, function() {
+	console.log("NodeJS server running on :3000");
+});
+
 // petición GET para obtener una canción
 app.get('/cancion/:trackname', function(req, res) {
   res.sendfile('/mnt/nas/canciones/' + req.params.trackname);
@@ -55,7 +60,7 @@ app.post('/', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'track', ma
   	console.log("success!")
   });
 	//comprobación de si existe imagen
-  if(req.files['image']!== undefined){
+  if (req.files['image'] !== undefined) {
 	  console.log('Datos de la portada subida: ' + req.files['image'][0]);
 	  var imagen = req.files['image'][0];
 		//copia la imagen de forma síncrona a los nas		
@@ -71,8 +76,3 @@ app.post('/', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'track', ma
 	}
 	res.send(200);
 })
-
-// El servidor escucha en el puerto 3000
-server.listen(3000, function() {
-  console.log("Node server running on :3000");
-});
