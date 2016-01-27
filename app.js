@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
     app.use(app.router);
     app.use(express.methodOverride());
-    app.use(express.limit('50mb'));
+    app.use(express.limit('100mb'));
 var fse = require('fs-extra');
 var http = require('http');
     http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
@@ -35,14 +35,14 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image' }, { name: 't
 });
 
 // GET request - Get track
-app.get('/cancion/:trackname', function(req, res) {
+app.get('/cancion/:trackname', function (req, res) {
 	res.sendfile('/mnt/nas/canciones/' + req.params.trackname);
 });
 
 
 // DELETE request - Delete track
-app.delete('/cancion/:trackname', function(req, res) {
-	fse.unlink('/mnt/nas/canciones/' + req.params.trackname, function(err){
+app.delete('/cancion/:trackname', function (req, res) {
+	fse.unlink('/mnt/nas/canciones/' + req.params.trackname, function (err) {
 		if (err) return console.error('ERROR: ' + err);
 		console.log('OK: Track deleted successfully');
 	});
@@ -50,13 +50,13 @@ app.delete('/cancion/:trackname', function(req, res) {
 });
 
 // GET request - Get cover
-app.get('/imagen/:imagename', function(req, res) {
+app.get('/imagen/:imagename', function (req, res) {
 	res.sendfile('/mnt/nas/imagenes/' + req.params.imagename);
 });
 
 // DELETE request - Delete cover
-app.delete('/imagen/:imagename', function(req, res) {
-	fse.unlink('/mnt/nas/imagenes/' + req.params.imagename, function(err){
+app.delete('/imagen/:imagename', function (req, res) {
+	fse.unlink('/mnt/nas/imagenes/' + req.params.imagename, function (err) {
 		if (err) return console.error('ERROR: ' + err);
 		console.log('OK: Cover deleted successfully');
 	});
