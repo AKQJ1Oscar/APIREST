@@ -1,40 +1,38 @@
 // Dependencies
-var express = require("express");
+var express = require('express');
 var app = express();
     app.use(app.router);
     app.use(express.methodOverride());
     app.use(express.limit('50mb'));
 var fse = require('fs-extra');
-var http = require("http");
+var http = require('http');
     http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
 var mongoose = require('mongoose');
 var multer = require('multer');
 var qs = require('querystring');
 
-//var upload = multer({ dest: 'uploads/' });
-
-// petición POST para subir una canción
+// POST request - Upload track and cover
 app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 }, { name: 'track', maxCount: 1 }]), function (req, res, next) {
-  console.log('Datos de la canción subida: ' + req.files['track'][0]);
-  var cancion = req.files['track'][0];
-  //mover la canción de directorio a los nas
-  fse.move(cancion.path, '/mnt/nas/canciones/' + cancion.originalname, function (err) {
-   	if (err) return console.error(err);
-  	console.log("success!")
-  });
-	//comprobación de si existe imagen
-  if (req.files['image'] !== undefined) {
-	  console.log('Datos de la portada subida: ' + req.files['image'][0]);
-	  var imagen = req.files['image'][0];
-		//copia la imagen de forma síncrona a los nas		
+	console.log('INFO: A track is being uploaded');
+  	var cancion = req.files['track'][0];
+  	// mover la canción de directorio a los nas
+  	fse.move(cancion.path, '/mnt/nas/canciones/' + cancion.originalname, function (err) {
+   		if (err) return console.error(err);
+  		console.log("OK: Track uploaded successfully")
+	});
+	// comprobación de si existe imagen
+	if (req.files['image'] !== undefined) {
+		console.log('INFO: A cover for the track is being uploades');
+		var imagen = req.files['image'][0];
+		// copia la imagen de forma síncrona a los nas		
 		try {
 			fse.copySync(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname);
 		} catch (err) {
-			console.error('Oh no, there was an error: ' + err.message)
+			console.error('ERROR: ' + err.message)
 		}
 		fse.unlink(imagen.path, function(err){
 			if (err) return console.error(err);
-			console.log('delete success');
+			console.log('OK: Cover uploaded successfully');
 		});
 	}
 	res.send(200);
