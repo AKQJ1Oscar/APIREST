@@ -57,7 +57,7 @@ app.get('/imagen/:imagename', function(req, res) {
 app.delete('/imagen/:imagename', function(req, res) {
 	fse.unlink('/mnt/nas/imagenes/' + req.params.imagename, function(err){
 		if (err) return console.error('ERROR: ' + err);
-		console.log('OK: Cover uploaded successfully');
+		console.log('OK: Cover deleted successfully');
 	});
 	res.send(200);
 });
