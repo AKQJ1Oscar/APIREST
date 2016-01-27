@@ -7,18 +7,16 @@ var multer = require('multer');
 var qs = require('querystring');
 
 var app = express();
-var server = http.createServer(app);
-var upload = multer({ dest: 'public/' });
-
-// REST configuration
 app.use(app.router);
 app.use(express.methodOverride()); // HTTP: PUT and DELETE support
 app.use(express.limit('50mb'));    // Max file size
 
-// Server listening on port 3000
+var server = http.createServer(app);
 server.listen(3000, function() {
 	console.log("NodeJS server running on :3000");
 });
+
+var upload = multer({ dest: 'public/' });
 
 // petición GET para obtener una canción
 app.get('/cancion/:trackname', function(req, res) {
