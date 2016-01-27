@@ -21,7 +21,8 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 
   		console.log('OK: Track uploaded successfully')
 	});
 	// Upload cover if exists
-	if (req.files['image'] !== undefined) {
+//	if (req.files['image'] !== undefined) {
+	if (!req.files['image']) {
 		console.log('INFO: A cover for the track is being uploaded');
 		var imagen = req.files['image'][0];
 		// Move cover to nas directory
@@ -30,6 +31,7 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 
 			console.log('OK: Cover uploaded successfully');
 		});
 	}
+	else console.log('prueba');
 	res.send(200);
 });
 
