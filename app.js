@@ -13,7 +13,7 @@ var upload = multer({ dest: 'public/' });
 // REST configuration
 app.configure(function () {
 	app.use(express.methodOverride()); // HTTP: PUT and DELETE support
-	app.use(express.limit('50M'));    // Max file size
+	app.use(express.limit('20mb'));    // Max file size
 	app.use(app.router);
 });
 
