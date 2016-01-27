@@ -1,5 +1,3 @@
-// app.js
-
 // Incluímos las dependencias que vamos a utilizar
 var express = require("express"),
     app     = express(),
@@ -14,11 +12,9 @@ var upload = multer({ dest: 'public/' });
 
 // Configuramos la app para que pueda realizar métodos REST
 app.configure(function () {
-
-  app.use(express.methodOverride()); // HTTP PUT and DELETE support
-  app.use(express.limit('20mb'));    // Tamaño maximo
-  app.use(app.router); 		     			 // simple route management
-
+	app.use(app.router);
+	app.use(express.methodOverride()); // HTTP: PUT and DELETE support
+	app.use(express.limit('50M'));    // Max file size
 });
 
 // petición GET para obtener una canción
@@ -76,7 +72,7 @@ app.post('/', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'track', ma
 	res.send(200);
 })
 
-// El servidor escucha en el puerto 3000
+// Server listening on port 3000
 server.listen(3000, function() {
-  console.log("Node server running on :3000");
+	console.log("Node server running on :3000");
 });
