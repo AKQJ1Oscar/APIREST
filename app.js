@@ -14,7 +14,7 @@ var upload = multer({ dest: 'public/' });
 app.configure(function () {
 	app.use(app.router);
 	app.use(express.methodOverride()); // HTTP: PUT and DELETE support
-	app.use(express.limit('50MB'));    // Max file size
+	app.use(express.limit('50mB'));    // Max file size
 });
 
 // petición GET para obtener una canción
