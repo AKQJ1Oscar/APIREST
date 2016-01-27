@@ -1,9 +1,9 @@
 // Dependencies
-var express = require("express");
+var express = require('express');
 var fse = require('fs-extra');
-var http = require("http");
+var http = require('http');
     http.createServer(app).listen(3000, function() {
-	console.log("NodeJS server running on :3000");
+	console.log('NodeJS server running on :3000');
     });
 var mongoose = require('mongoose');
 var multer = require('multer');
@@ -14,10 +14,8 @@ app.use(app.router);
 app.use(express.methodOverride());
 app.use(express.limit('50mb'));
 
-var upload = multer({ dest: 'uploads/' });
-
 // petición POST para subir una canción
-app.post('/', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'track', maxCount: 1 }]), function (req, res, next) {
+app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 }, { name: 'track', maxCount: 1 }]), function (req, res, next) {
   console.log('Datos de la canción subida: ' + req.files['track'][0]);
   var cancion = req.files['track'][0];
   //mover la canción de directorio a los nas
