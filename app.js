@@ -11,17 +11,14 @@ var server = http.createServer(app);
 var upload = multer({ dest: 'public/' });
 
 // REST configuration
-app.configure(function () {
-	app.use(app.router);
-	app.use(express.methodOverride()); // HTTP: PUT and DELETE support
-	app.use(express.limit('50mb'));    // Max file size
-});
+app.use(app.router);
+app.use(express.methodOverride()); // HTTP: PUT and DELETE support
+app.use(express.limit('50mb'));    // Max file size
 
 // Server listening on port 3000
 server.listen(3000, function() {
 	console.log("NodeJS server running on :3000");
 });
-res.send(200);
 
 // petición GET para obtener una canción
 app.get('/cancion/:trackname', function(req, res) {
