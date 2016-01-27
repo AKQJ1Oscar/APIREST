@@ -2,6 +2,9 @@
 var express = require("express");
 var fse = require('fs-extra');
 var http = require("http");
+    http.createServer(app).listen(3000, function() {
+	console.log("NodeJS server running on :3000");
+    });
 var mongoose = require('mongoose');
 var multer = require('multer');
 var qs = require('querystring');
@@ -10,10 +13,6 @@ var app = express();
 app.use(app.router);
 app.use(express.methodOverride());
 app.use(express.limit('50mb'));
-
-http.createServer(app).listen(3000, function() {
-	console.log("NodeJS server running on :3000");
-});
 
 var upload = multer({ dest: 'uploads/' });
 
