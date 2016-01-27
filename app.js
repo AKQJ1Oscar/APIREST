@@ -21,6 +21,7 @@ app.configure(function () {
 server.listen(3000, function() {
 	console.log("NodeJS server running on :3000");
 });
+res.send(200);
 
 // petición GET para obtener una canción
 app.get('/cancion/:trackname', function(req, res) {
