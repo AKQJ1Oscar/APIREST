@@ -30,14 +30,14 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 
 //		} catch (err) {
 //			console.error('ERROR: ' + err)
 //		}
-		fse.copySync(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname, function (err) {
+		fse.move(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname, function (err) {
 			if (err) return console.error('ERROR: ' + err);
 			console.log('OK: Cover uploaded successfully');
 		});
-		fse.unlink(imagen.path, function (err) {
-			if (err) return console.error('ERROR: ' + err);
-			console.log('OKiloko: Cover uploaded successfully');
-		});
+//		fse.unlink(imagen.path, function (err) {
+//			if (err) return console.error('ERROR: ' + err);
+//			console.log('OKiloko: Cover uploaded successfully');
+//		});
 	}
 	res.send(200);
 })
