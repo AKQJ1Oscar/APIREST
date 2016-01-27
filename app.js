@@ -53,7 +53,7 @@ app.get('/imagen/:imagename', function(req, res) {
 	res.sendfile('/mnt/nas/imagenes/' + req.params.imagename);
 });
 
-// // DELETE request - Delete cover
+// DELETE request - Delete cover
 app.delete('/imagen/:imagename', function(req, res) {
 	fse.unlink('/mnt/nas/imagenes/' + req.params.imagename, function(err){
 		if (err) return console.error('ERROR: ' + err);
