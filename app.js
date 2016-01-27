@@ -10,13 +10,11 @@ var app = express();
 var server = http.createServer(app);
 var upload = multer({ dest: 'public/' });
 
-// Configuramos la app para que pueda realizar métodos REST
+// REST configuration
 app.configure(function () {
-
-  app.use(express.methodOverride()); // HTTP PUT and DELETE support
-  app.use(express.limit('20mb'));    // Tamaño maximo
-  app.use(app.router); 		     			 // simple route management
-
+	app.use(express.methodOverride()); // HTTP: PUT and DELETE support
+	app.use(express.limit('50M'));    // Max file size
+	app.use(app.router);
 });
 
 // petición GET para obtener una canción
