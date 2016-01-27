@@ -17,22 +17,26 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image', maxCount: 1 
   	var cancion = req.files['track'][0];
   	// mover la canción de directorio a los nas
   	fse.move(cancion.path, '/mnt/nas/canciones/' + cancion.originalname, function (err) {
-   		if (err) return console.error(err);
+   		if (err) return console.error('ERROR: ' + err);
   		console.log("OK: Track uploaded successfully")
 	});
-	// comprobación de si existe imagen
+	// Upload cover if exists
 	if (req.files['image'] !== undefined) {
-		console.log('INFO: A cover for the track is being uploades');
+		console.log('INFO: A cover for the track is being uploaded');
 		var imagen = req.files['image'][0];
 		// copia la imagen de forma síncrona a los nas		
-		try {
-			fse.copySync(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname);
-		} catch (err) {
-			console.error('ERROR: ' + err.message)
-		}
+//		try {
+//			fse.copySync(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname);
+//		} catch (err) {
+//			console.error('ERROR: ' + err.message)
+//		}
+		fse.copySync(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname, function (err) {
+			if (err) return console.error('ERROR: ' + err);
+			console.log('OK: Cover uploaded successfully');
+		});
 		fse.unlink(imagen.path, function(err){
 			if (err) return console.error(err);
-			console.log('OK: Cover uploaded successfully');
+			console.log('OKiloko: Cover uploaded successfully');
 		});
 	}
 	res.send(200);
