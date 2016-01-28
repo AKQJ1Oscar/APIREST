@@ -1,12 +1,12 @@
 // Dependencies
 var express = require('express');
 var app = express();
-	app.use(app.router);
-	app.use(express.methodOverride());
-	app.use(express.limit('100mb'));
+    app.use(app.router);
+    app.use(express.methodOverride());
+    app.use(express.limit('100mb'));
 var fs = require('fs-extra');
 var http = require('http');
-	http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
+    http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
 var multer = require('multer');
 
 // POST request - Upload track and cover
