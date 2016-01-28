@@ -7,9 +7,8 @@ var app = express();
 var fs = require('fs-extra');
 var http = require('http');
     http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 var multer = require('multer');
-// var qs = require('querystring');
 
 // POST request - Upload track and cover
 app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image' }, { name: 'track' }]), function (req, res, next) {
@@ -38,7 +37,6 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image' }, { name: 't
 app.get('/cancion/:trackname', function (req, res) {
 	res.sendfile('/mnt/nas/canciones/' + req.params.trackname);
 });
-
 
 // DELETE request - Delete track
 app.delete('/cancion/:trackname', function (req, res) {
