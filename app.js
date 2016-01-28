@@ -13,9 +13,9 @@ var multer = require('multer');
 // POST request - Upload track and cover
 app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'track' }, { name: 'image' }]), function (req, res, next) {
 	console.log('INFO: A track is being uploaded');
-  	var cancion = req.files['track'][0];
+  	//var cancion = req.files['track'][0];
   	// Move track to nas directory
-  	fs.move(cancion.path, '/mnt/nas/canciones/' + cancion.originalname, function (err) {
+  	fs.move(req.files['track'][0].path, '/mnt/nas/canciones/' + req.files['track'][0].originalname, function (err) {
    		if (err) return console.error('ERROR: ' + err);
   		console.log('OK: Track uploaded successfully')
 	});
@@ -23,9 +23,9 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'track' }, { name: 'i
 	if (!req.files['image']) console.log('INFO: No cover is being uploaded');
 	else {
 		console.log('INFO: A cover for the track is being uploaded');
-		var imagen = req.files['image'][0];
+		//var imagen = req.files['image'][0];
 		// Move cover to nas directory
-		fs.move(imagen.path, '/mnt/nas/imagenes/' + imagen.originalname, function (err) {
+		fs.move(req.files['image'][0].path, '/mnt/nas/imagenes/' + req.files['image'][0].originalname, function (err) {
 			if (err) return console.error('ERROR: ' + err);
 			console.log('OK: Cover uploaded successfully');
 		});
