@@ -1,20 +1,17 @@
 // Dependencies
 var express = require('express');
 var app = express();
-    app.use(app.router);
-    app.use(express.methodOverride());
-    app.use(express.limit('100mb'));
+	app.use(app.router);
+	app.use(express.methodOverride());
+	app.use(express.limit('100mb'));
 var fs = require('fs-extra');
 var http = require('http');
-    http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
-// var mongoose = require('mongoose');
+	http.createServer(app).listen(3000, function() { console.log('NodeJS server running on :3000'); });
 var multer = require('multer');
 
 // POST request - Upload track and cover
 app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'track' }, { name: 'image' }]), function (req, res, next) {
 	console.log('INFO: A track is being uploaded');
-  	//var cancion = req.files['track'][0];
-  	// Move track to nas directory
   	fs.move(req.files['track'][0].path, '/mnt/nas/canciones/' + req.files['track'][0].originalname, function (err) {
    		if (err) return console.error('ERROR: ' + err);
   		console.log('OK: Track uploaded successfully')
@@ -23,8 +20,6 @@ app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'track' }, { name: 'i
 	if (!req.files['image']) console.log('INFO: No cover is being uploaded');
 	else {
 		console.log('INFO: A cover for the track is being uploaded');
-		//var imagen = req.files['image'][0];
-		// Move cover to nas directory
 		fs.move(req.files['image'][0].path, '/mnt/nas/imagenes/' + req.files['image'][0].originalname, function (err) {
 			if (err) return console.error('ERROR: ' + err);
 			console.log('OK: Cover uploaded successfully');
