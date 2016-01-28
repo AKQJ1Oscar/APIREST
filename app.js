@@ -11,7 +11,7 @@ var http = require('http');
 var multer = require('multer');
 
 // POST request - Upload track and cover
-app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'image' }, { name: 'track' }]), function (req, res, next) {
+app.post('/', multer({ dest: 'uploads/' }).fields([{ name: 'track' }, { name: 'image' }]), function (req, res, next) {
 	console.log('INFO: A track is being uploaded');
   	var cancion = req.files['track'][0];
   	// Move track to nas directory
