@@ -35,6 +35,7 @@ app.get('/cancion/:trackname', function (req, res) {
 
 // DELETE request - Delete track
 app.delete('/cancion/:trackname', function (req, res) {
+	console.log('INFO: A track is being deleted');
 	fs.unlink('/mnt/nas/canciones/' + req.params.trackname, function (err) {
 		if (err) return console.error('ERROR: ' + err);
 		console.log('OK: Track deleted successfully');
@@ -49,6 +50,7 @@ app.get('/imagen/:imagename', function (req, res) {
 
 // DELETE request - Delete cover
 app.delete('/imagen/:imagename', function (req, res) {
+	console.log('INFO: Its cover is being deleted');
 	fs.unlink('/mnt/nas/imagenes/' + req.params.imagename, function (err) {
 		if (err) return console.error('ERROR: ' + err);
 		console.log('OK: Cover deleted successfully');
