@@ -37,10 +37,8 @@ app.get('/cancion/:trackname', function (req, res) {
 app.delete('/cancion/:trackname', function (req, res) {
 	console.log('INFO: A track is being deleted');
 	fs.unlink('/mnt/nas/canciones/' + req.params.trackname, function (err) {
-//		if (err) return console.error('ERROR: ' + err);
-//		console.log('OK: Track deleted successfully');
-	if (err) console.log('ERROR: ' + err);
-	else console.log('OK: Track deleted successfully');
+		if (err) return console.error('ERROR: ' + err);
+		console.log('OK: Track deleted successfully');
 	});
 	res.send(200);
 });
